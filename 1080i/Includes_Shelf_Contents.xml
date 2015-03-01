@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
     <!-- PVR Shelf with links to TV guide, recordings etc.-->
-    <include name="LiveTV.List">
+    <include name="PVR.Buttons.List">
         <control type="label" description="Header">
-            <visible>Control.IsVisible(311)</visible>
+            <visible>Control.IsVisible(333)</visible>
             <include>RecentlyAdded_Header</include>
-            <label>$INFO[Container(311).ListItem.Property(ItemType)]</label>
+            <label>$LOCALIZE[31500]</label>
         </control>
         <control type="label" description="Label">
-            <visible>Control.HasFocus(311)</visible>
+            <visible>Control.HasFocus(333)</visible>
             <include condition="!Skin.HasSetting(VerticalHome)">Horizontal_Label_Commons</include>
             <include>RecentlyAdded_Label</include>
-            <label>$INFO[Container(311).ListItem.Label]</label>
+            <label>$INFO[Container(333).ListItem.Label]</label>
         </control>
-        <control type="fixedlist" id="311" description="Live TV">
+        <control type="fixedlist" id="333" description="Live TV">
             <visible>Container(300).HasFocus(300)</visible>
-            <onright>111</onright>
+            <onright>333</onright>
             <onup>300</onup>
             <ondown>300</ondown>
             <onleft condition="Skin.HasSetting(VerticalHome)">300</onleft>
-            <onleft condition="!Skin.HasSetting(VerticalHome)">111</onleft>
+            <onleft condition="!Skin.HasSetting(VerticalHome)">333</onleft>
             <include condition="!Skin.HasSetting(VerticalHome)">Horizontal_Shelf_Commons</include>
             <include>RecentlyAdded_Addons</include>
             <content>
-                <item id="1" description="AutoFavourite">
+                <item id="1" description="TVGuide">
                     <label>TV Guide</label>
                     <thumb>DefaultThumb.png</thumb>
                     <property name="ItemType">$LOCALIZE[1036]</property>
                     <onclick>ActivateWindow(TVGuide)</onclick>
                 </item>
-                <item id="2" description="AutoFavourite">
+                <item id="2" description="TVRecordings">
                     <label>Recordings</label>
                     <thumb>DefaultThumb.png</thumb>
                     <property name="ItemType">$LOCALIZE[1036]</property>
                     <onclick>ActivateWindow(TVRecordings)</onclick>
                 </item>
-                <item id="3" description="AutoFavourite">
+                <item id="3" description="TVTimers">
                     <label>Timers</label>
                     <thumb>DefaultThumb.png</thumb>
                     <property name="ItemType">$LOCALIZE[1036]</property>
                     <onclick>ActivateWindow(TVTimers)</onclick>
                 </item>
-                <item id="4" description="AutoFavourite">
+                <item id="4" description="TVChannels">
                     <label>Channels</label>
                     <thumb>DefaultThumb.png</thumb>
                     <property name="ItemType">$LOCALIZE[1036]</property>
                     <onclick>ActivateWindow(TVChannels)</onclick>
                 </item>
-                <item id="5" description="AutoFavourite">
+                <item id="5" description="TVSearch">
                     <label>Search</label>
                     <thumb>DefaultThumb.png</thumb>
                     <property name="ItemType">$LOCALIZE[1036]</property>
