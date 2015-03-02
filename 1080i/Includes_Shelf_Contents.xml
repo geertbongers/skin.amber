@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
     <!-- PVR Shelf with links to TV guide, recordings etc.-->
+    <!--<include name="PVR.Buttons.List">-->
+        <!--<control type="label" description="Header">-->
+            <!--<visible>Control.IsVisible(333)</visible>-->
+            <!--<include>RecentlyAdded_Header</include>-->
+            <!--<label>$LOCALIZE[31500]</label>-->
+        <!--</control>-->
+        <!--<control type="label" description="Label">-->
+            <!--<visible>Control.HasFocus(333)</visible>-->
+            <!--<include condition="!Skin.HasSetting(VerticalHome)">Horizontal_Label_Commons</include>-->
+            <!--<include>RecentlyAdded_Label</include>-->
+            <!--<label>$INFO[Container(333).ListItem.Label]</label>-->
+        <!--</control>-->
+        <!--<control type="fixedlist" id="333" description="Live TV">-->
+            <!--<visible>Container(300).HasFocus(300)</visible>-->
+            <!--<onright>333</onright>-->
+            <!--<onup>300</onup>-->
+            <!--<ondown>300</ondown>-->
+            <!--<onleft condition="Skin.HasSetting(VerticalHome)">300</onleft>-->
+            <!--<onleft condition="!Skin.HasSetting(VerticalHome)">333</onleft>-->
+            <!--<include condition="!Skin.HasSetting(VerticalHome)">Horizontal_Shelf_Commons</include>-->
+            <!--<include>RecentlyAdded_Addons</include>-->
+            <!--<content>-->
+                <!--<item id="1" description="TVGuide">-->
+                    <!--<label>TV Guide</label>-->
+                    <!--<thumb>DefaultThumb.png</thumb>-->
+                    <!--<property name="ItemType">$LOCALIZE[1036]</property>-->
+                    <!--<onclick>ActivateWindow(TVGuide)</onclick>-->
+                <!--</item>-->
+                <!--<item id="2" description="TVRecordings">-->
+                    <!--<label>Recordings</label>-->
+                    <!--<thumb>DefaultThumb.png</thumb>-->
+                    <!--<property name="ItemType">$LOCALIZE[1036]</property>-->
+                    <!--<onclick>ActivateWindow(TVRecordings)</onclick>-->
+                <!--</item>-->
+                <!--<item id="3" description="TVTimers">-->
+                    <!--<label>Timers</label>-->
+                    <!--<thumb>DefaultThumb.png</thumb>-->
+                    <!--<property name="ItemType">$LOCALIZE[1036]</property>-->
+                    <!--<onclick>ActivateWindow(TVTimers)</onclick>-->
+                <!--</item>-->
+                <!--<item id="4" description="TVChannels">-->
+                    <!--<label>Channels</label>-->
+                    <!--<thumb>DefaultThumb.png</thumb>-->
+                    <!--<property name="ItemType">$LOCALIZE[1036]</property>-->
+                    <!--<onclick>ActivateWindow(TVChannels)</onclick>-->
+                <!--</item>-->
+                <!--<item id="5" description="TVSearch">-->
+                    <!--<label>Search</label>-->
+                    <!--<thumb>DefaultThumb.png</thumb>-->
+                    <!--<property name="ItemType">$LOCALIZE[1036]</property>-->
+                    <!--<onclick>ActivateWindow(TVSearch)</onclick>-->
+                <!--</item>-->
+            <!--</content>-->
+        <!--</control>-->
+    <!--</include>-->
+
     <include name="PVR.Buttons.List">
         <control type="label" description="Header">
             <visible>Control.IsVisible(333)</visible>
@@ -13,15 +69,16 @@
             <include>RecentlyAdded_Label</include>
             <label>$INFO[Container(333).ListItem.Label]</label>
         </control>
-        <control type="fixedlist" id="333" description="Live TV">
-            <visible>Container(300).HasFocus(300)</visible>
+        <control type="fixedlist" id="333" description="Movies PLEXBMC">
+            <visible>StringCompare(Container(300).ListItem.Property(type),movie)</visible>
             <onright>333</onright>
             <onup>300</onup>
-            <ondown>300</ondown>
             <onleft condition="Skin.HasSetting(VerticalHome)">300</onleft>
             <onleft condition="!Skin.HasSetting(VerticalHome)">333</onleft>
+            <ondown condition="Control.IsVisible(334)">334</ondown>
+            <ondown condition="!Control.IsVisible(334)">300</ondown>
             <include condition="!Skin.HasSetting(VerticalHome)">Horizontal_Shelf_Commons</include>
-            <include>RecentlyAdded_Addons</include>
+            <include>RecentlyAdded_Posters</include>
             <content>
                 <item id="1" description="TVGuide">
                     <label>TV Guide</label>
@@ -52,6 +109,47 @@
                     <thumb>DefaultThumb.png</thumb>
                     <property name="ItemType">$LOCALIZE[1036]</property>
                     <onclick>ActivateWindow(TVSearch)</onclick>
+                </item>
+            </content>
+        </control>
+
+        <control type="label" description="Header">
+            <visible>Control.IsVisible(334)</visible>
+            <include>Recommended_Header</include>
+            <label>$INFO[Container(334).ListItem.Property(ItemType)]</label>
+        </control>
+        <control type="label" description="Label">
+            <visible>Control.HasFocus(334)</visible>
+            <include condition="!Skin.HasSetting(VerticalHome)">Horizontal_Label_Commons</include>
+            <include>Recommended_Label</include>
+            <label>$INFO[Container(334).ListItem.Label]</label>
+        </control>
+        <control type="fixedlist" id="312" description="Movies PLEXBMC">
+            <visible>!IsEmpty(Window(Home).Property(Plexbmc.OnDeckMovie.1.Path))</visible>
+            <visible>StringCompare(Container(300).ListItem.Property(type),movie)</visible>
+            <onright>334</onright>
+            <onup condition="Control.IsVisible(333)">333</onup>
+            <onup condition="!Control.IsVisible(333)">300</onup>
+            <ondown>300</ondown>
+            <onleft condition="Skin.HasSetting(VerticalHome)">300</onleft>
+            <onleft condition="!Skin.HasSetting(VerticalHome)">334</onleft>
+            <include condition="!Skin.HasSetting(VerticalHome)">Horizontal_Shelf_Commons</include>
+            <include>Recommended_Posters</include>
+            <content>
+                <!--<item id="1" description="Shortcut 1 (skin widgets)">-->
+                    <!--<visible>!IsEmpty(Window(Home).Property(RecentMovie.1.Title))</visible>-->
+                    <!--<label>$INFO[Window(Home).Property(RecentMovie.1.Title)][COLOR=White]$INFO[Window(Home).Property(RecentMovie.1.Year), • ]$INFO[Window(Home).Property(RecentMovie.1.Runtime), • , $LOCALIZE[12391]]$INFO[Window(Home).Property(RecentMovie.1.Rating), • ][/COLOR]</label>-->
+                    <!--<thumb>$INFO[Window(Home).Property(RecentMovie.1.Art(poster))]</thumb>-->
+                    <!--<property name="ItemType">$LOCALIZE[31961]</property>-->
+                    <!--<onclick>PlayMedia($ESCINFO[Window(Home).Property(RecentMovie.1.File)])</onclick>-->
+                <!--</item>-->
+
+                <item id="1" description="Recordings">
+                    <!--<visible>!IsEmpty(Window(Home).Property(Plexbmc.OnDeckMovie.1.Path))</visible>-->
+                    <label>$INFO[Window(Home).Property(RecentRecording.1.Title)]</label>
+                    <thumb fallback="DefaultThumb.png">$INFO[Container(50).ListItem.Thumb)]</thumb>
+                    <property name="ItemType">$LOCALIZE[31014]</property>
+                    <onclick>PlayMedia($ESCINFO[Container(50).ListItem.Path)])</onclick>
                 </item>
             </content>
         </control>
